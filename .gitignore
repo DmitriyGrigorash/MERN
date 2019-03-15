@@ -63,3 +63,5 @@ fabric.properties
 
 .idea/
 node_modules/
+config/
+/config/googleoauth.json
