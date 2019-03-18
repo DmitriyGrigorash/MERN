@@ -17,8 +17,7 @@ let keys = {redirect_uris: ['']};
 if (fs.existsSync(keyPath)) {
     keys = require(keyPath).web;
 }
-const TOKEN_PATH = './config/token.json';
-const SCOPES = ['profile'];
+const SCOPES = 'https://www.googleapis.com/auth/userinfo.profile';
 
 const oauth2Client = new google.auth.OAuth2(
     keys.client_id,
@@ -41,10 +40,6 @@ function getNewToken(code) {
     oauth2Client.getToken(code, (err, token) => {
         if ( err ) return console.error( 'Error retrieving access token', err );
         oauth2Client.setCredentials( token );
-        fs.writeFile( TOKEN_PATH, JSON.stringify( token ), ( err ) => {
-            if ( err ) return console.error( err );
-            console.log( 'Token stored to', TOKEN_PATH );
-        });
     });
 }
 
@@ -58,12 +53,9 @@ router.get('/auth/google', (req, res) => {
 });
 router.get('/auth/google/callback', (req, res) => {
     const code = req.query.code;
-
-    fs.readFile(TOKEN_PATH, (err, token) => {
-        if (err) getNewToken(code);
-        oauth2Client.setCredentials(JSON.parse(token));
-    })
-
+        getNewToken(code);
+        console.log('#### req.query', req.query);
+        res.end('Authentication successful! Please return to the console.');
 });
 
 
