@@ -1,14 +1,20 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 
+const config = require('./config/config');
 require('./services/passport');
 
-// *** Run express
+/*** Mongoose ***/
+mongoose.connect(config.MongoUri, { useNewUrlParser: true });
+
+
+/*** Run express ***/
 const app = express();
 app.use(router);
-
-require('./routes/authRoutes')(app, router);
 const PORT = 5000;
+require('./routes/authRoutes')(app, router);
+
 
 // *** Express listen
 app.listen(PORT, () => {
