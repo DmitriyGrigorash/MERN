@@ -1,55 +1,46 @@
-const {google} = require('googleapis');
+const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const url = require('url');
-const http = require('http');
-const opn = require('opn');
-const destroyer = require('destroyer');
+const router = express.Router();
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const passport = require('passport');
+
+// *** Run express
+const app = express();
+const PORT = 5000;
+app.use(router);
 
 
-const keyPath = path.join(__dirname, './config/googleoauth.json');
-let keys = {redirect_uris: ['']};
-if (fs.existsSync(keyPath)) {
-    keys = require(keyPath).web;
-}
-const oauth2Client = new google.auth.OAuth2(
-    keys.client_id,
-    keys.client_secret,
-    keys.redirect_uris[0],
-);
+// ***  settings
+const keys = require('./config/credentials');
+console.log('#### keys', keys);
 
 
-async function authenticate(scopes) {
-    return new Promise((resolve, reject) => {
-        // grab the url that will be used for authorization
-        const authorizeUrl = oauth2Client.generateAuthUrl({
-            access_type: 'offline',
-            scope: scopes.join(' '),
-        });
-        const server = http
-            .createServer(async (req, res) => {
-                try {
-                    if (req.url.indexOf('/auth/google') > -1) {
-                        const qs = new url.URL(req.url, 'http://localhost:5000').searchParams;
-                        // res.end('Authentication successful! Please return to the console.');
-                        res.end('Authentication successful! Please return to the console.');
-                        const {tokens} = await oauth2Client.getToken(qs.get('code'));
-                        oauth2Client.credentials = tokens;
-                        resolve(oauth2Client);
-                    }
-                } catch (e) {
-                    reject(e);
-                }
-            })
-            .listen(5000, () => {
-                // open the browser to the authorize url to start the workflow
-                opn(authorizeUrl, {wait: false}).then(cp => cp.unref());
-            });
-        destroyer(server);
-    });
-}
+passport.use(new GoogleStrategy({
+        clientID: keys.web.client_id,
+        clientSecret: keys.web.client_secret,
+        callbackURL: keys.web.redirect_uris[0],
+    },
+    (accessToken, refreshToken, profile, cb) => {
+        console.log('#### accessToken, refreshToken, profile, cb', accessToken, refreshToken, profile, cb);
+    }
+));
 
-const scopes = ['profile'];
-authenticate(scopes)
-    .then(client => console.log('#### client', client))
-    .catch(console.error);
+/* ROUTES */
+app.get('/', (req, res) => {
+     res.send('Logged in! Welcome friend!')
+});
+app.get('/auth/google',
+    passport.authenticate('google', { scope: ['profile'] }));
+
+app.get('/auth/google/callback', (req, res) => {
+    passport.authenticate('google', { failureRedirect: '/login' }),
+    res.redirect('/');
+});
+
+
+
+// *** Express listen
+app.listen(PORT, () => {
+    console.log('#### Server is running on port: ', PORT);
+});

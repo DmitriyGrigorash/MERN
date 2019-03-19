@@ -18,7 +18,8 @@
     "googleapis": "^37.2.0",
     "opn": "^5.4.0",
     "passport": "^0.4.0",
-    "passport-google-oauth": "^1.0.0"
+    "passport-google-oauth": "^1.0.0",
+    "passport-google-oauth20": "^2.0.0"
   },
   "devDependencies": {
     "body-parser": "latest",
