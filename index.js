@@ -13,7 +13,6 @@ app.use(router);
 
 // ***  settings
 const keys = require('./config/credentials');
-console.log('#### keys', keys);
 
 
 passport.use(new GoogleStrategy({
@@ -26,7 +25,7 @@ passport.use(new GoogleStrategy({
     }
 ));
 
-/* ROUTES */
+/*** ROUTES ***/
 app.get('/', (req, res) => {
      res.send('Logged in! Welcome friend!')
 });
