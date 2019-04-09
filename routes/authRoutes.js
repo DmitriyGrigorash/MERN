@@ -5,7 +5,11 @@ module.exports = app => {
         res.send('Main route');
     });
     app.get('/user', (req, res) => {
-        res.send('Logged in! Welcome friend!' + req.user);
+        if (!req.user) {
+            res.send('Please log in!');
+        } else {
+            res.send('Logged in! Welcome friend! ' + req.user);
+        }
     });
 
     app.get('/login', (req, res) => {
@@ -23,7 +27,4 @@ module.exports = app => {
             res.redirect('/user')
         }
     );
-    app.get('/api/current_user', (req, res) => {
-        res.send(req.user);
-    });
 };
