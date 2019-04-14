@@ -3,13 +3,13 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
-const config = require('./config/config');
+const keys = require('./config/keys');
 
 require('./models/User');
 require('./services/passport');
 
 /*** Mongoose ***/
-mongoose.connect(config.MongoUri, { useNewUrlParser: true });
+mongoose.connect(keys.mongoUri, { useNewUrlParser: true });
 // const db = mongoose.connection;
 // db.on('error', console.error.bind(console, 'connection error:'));
 // db.once('open', function() {
