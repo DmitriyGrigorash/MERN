@@ -64,3 +64,5 @@ fabric.properties
 .idea/
 node_modules/
 config/dev.js
+.DS_Store
+/*.env
