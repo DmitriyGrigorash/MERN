@@ -8,7 +8,7 @@ module.exports = app => {
         if (!req.user) {
             res.send('Please log in!');
         } else {
-            res.send('Logged in! Welcome friend! ' + req.user);
+            res.send('Logged in! Welcome friend!');
         }
     });
 
