@@ -28,11 +28,15 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-const PORT = 5000;
+let port = process.env.PORT;
+if (port == null || port == "") {
+    port = 5000;
+}
+
 require('./routes/authRoutes')(app);
 
 
 // *** Express listen
-app.listen(PORT, () => {
-    console.log('#### Server is running on port: ', PORT);
+app.listen(port, () => {
+    console.log('#### Server is running on port: ', port);
 });
