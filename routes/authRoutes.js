@@ -4,11 +4,11 @@ module.exports = app => {
     app.get('/', (req, res) => {
         res.send('Main route');
     });
-    app.get('/user', (req, res) => {
+    app.get('/api/current_user', (req, res) => {
         if (!req.user) {
-            res.send('Please log in!');
+            res.send(null);
         } else {
-            res.send('Logged in! Welcome friend!');
+            res.send(req.user);
         }
     });
 
@@ -24,7 +24,7 @@ module.exports = app => {
         passport.authenticate('google', { scope: ['profile', 'email'] }));
     app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }),
         (req, res) => {
-            res.redirect('/user')
+            res.redirect('/')
         }
     );
 };

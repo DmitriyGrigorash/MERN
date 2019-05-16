@@ -22,21 +22,19 @@ passport.use(
             clientSecret: keys.googleClientSecret,
             callbackURL: keys.cbURI,
         },
-        function (accessToken, refreshToken, profile, cb) {
-            UserModel.findOne({googleId: profile.id})
-                .then(existingUser => {
-                    if(existingUser) {
-                    //    we already have a record with the given profile ID
-                        return cb(null, existingUser);
-                    } else {
-                        const User = new UserModel({googleId: profile.id});
-                        User.save((err, user) => {
-                            if (err) {
-                                console.log('#### err', err);
-                            }
-                            return cb(err, user);
-                        })
+        async (accessToken, refreshToken, profile, cb) => {
+            const existingUser = await UserModel.findOne({googleId: profile.id});
+            if(existingUser) {
+            //    we already have a record with the given profile ID
+                return cb(null, existingUser);
+            } else {
+                const User = await new UserModel({googleId: profile.id});
+                User.save((err, user) => {
+                    if (err) {
+                        console.log('#### err', err);
                     }
+                    return cb(null, user);
                 })
+            }
         }
 ));
