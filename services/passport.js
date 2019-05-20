@@ -21,6 +21,7 @@ passport.use(
             clientID: keys.googleClientId,
             clientSecret: keys.googleClientSecret,
             callbackURL: keys.cbURI,
+            proxy: true,
         },
         async (accessToken, refreshToken, profile, cb) => {
             const existingUser = await UserModel.findOne({googleId: profile.id});
