@@ -26,9 +26,25 @@ const styles = {
     }
 };
 
+function AuthBtn ({isAuth, classes}) {
+  if (isAuth) {
+    return(
+      <Button color="inherit">
+          <Link href='/api/logout' className={classes.link}>LOGOUT</Link>
+      </Button>
+    )
+  } else {
+    return (
+      <Button color="inherit">
+          <Link href='/auth/google' className={classes.link}>LOGIN</Link>
+      </Button>
+    )
+  }
+}
+
 export class Header extends React.PureComponent {
     render() {
-        const {classes} = this.props;
+        const {classes, isAuth} = this.props;
         return (
             <header className={classes.root}>
                 <AppBar position="static" color="secondary">
@@ -39,9 +55,7 @@ export class Header extends React.PureComponent {
                         <Typography variant="h6" color="inherit" className={classes.grow}>
                             Emaily
                         </Typography>
-                        <Button color="inherit">
-                            <Link href='/auth/google' className={classes.link}>LOGIN</Link>
-                        </Button>
+                        <AuthBtn isAuth={isAuth} classes={classes}/>
                     </Toolbar>
                 </AppBar>
             </header>
@@ -51,6 +65,7 @@ export class Header extends React.PureComponent {
 
 Header.propTypes = {
     classes: PropTypes.object.isRequired,
+    isAuth: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
 };
 
 export default withStyles(styles)(Header);

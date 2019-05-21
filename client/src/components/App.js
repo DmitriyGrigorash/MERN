@@ -25,7 +25,7 @@ class App extends React.Component {
         return(
             <main>
                 <React.Fragment>
-                    <Header />
+                    <Header isAuth={this.props.isAuth}/>
                     <Route exact path='/' component={Landing} />
                     <Route exact path='/surveys' component={Dashboard} />
                     <Route path='/surveys/new' component={SurveyNew} />

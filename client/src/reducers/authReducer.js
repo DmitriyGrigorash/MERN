@@ -1,7 +1,7 @@
 import {FETCH_USER, FETCH_USER_ERROR} from "../actions/types";
 
 const initialState = {
-    isAuth: null
+    isAuth: false
 };
 
 export default function ( state = initialState, action) {
