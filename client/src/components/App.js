@@ -21,9 +21,9 @@ class App extends React.Component {
     }
 
     render() {
+
         return(
             <main>
-
                 <React.Fragment>
                     <Header isAuth={this.props.isAuth}/>
                     <Route exact path='/' component={Landing} />
