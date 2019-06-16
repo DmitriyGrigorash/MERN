@@ -13,11 +13,11 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducers, composeEnhancers(
     applyMiddleware(reduxThunk)
 ));
-console.log('### process.env.REACT_APP_STRIPE_KEY', process.env.REACT_APP_STRIPE_KEY);
+
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
-            <StripeProvider apiKey='pk_test_C8xV6rF4m23avcSnqf1Uh6SS009JqIdgy9'>
+            <StripeProvider apiKey={process.env.REACT_APP_STRIPE_KEY}>
                 <App/>
             </StripeProvider>
         </BrowserRouter>

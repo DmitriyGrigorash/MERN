@@ -9,6 +9,7 @@ import * as actions from '../actions';
 
 import Header from './Header';
 import Landing from './Landing'
+import MyStoreCheckout from "./payments/MyStoreCheckout";
 
 
 const Dashboard = () => <h2>Dashboard</h2>;
@@ -27,6 +28,7 @@ class App extends React.Component {
                 <React.Fragment>
                     <Header isAuth={this.props.isAuth}/>
                     <Route exact path='/' component={Landing} />
+                    <Route exact path='/payments' component={MyStoreCheckout} />
                     <Route exact path='/surveys' component={Dashboard} />
                     <Route path='/surveys/new' component={SurveyNew} />
                 </React.Fragment>
