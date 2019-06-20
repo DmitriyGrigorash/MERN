@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_USER, FETCH_USER_ERROR } from './types';
+import { FETCH_USER, FETCH_USER_ERROR, FETCH_TOKEN, FETCH_TOKEN_ERROR } from './types';
 
 /* redux-thunk middleware using. Нам не нужен вызов метода стора dispatch до тех пор, пока наш axios request
     * не вернет ответ от сервера, а только потом мы вызываем method dispatch! Так происходит, когда в action мы
@@ -11,7 +11,14 @@ export const fetchUser = () => async (dispatch) => {
         .then(res => dispatch(
             {
                 type: FETCH_USER,
-                payload: !res.data || res.data === '' ? false : res
+                payload: !res.data || res.data === '' ? false : res.data
             }
         ),rej => dispatch({type: FETCH_USER_ERROR, payload: rej}))
+};
+
+export const handleToken = (token) => async dispatch => {
+    await axios.post('/api/stripe', token)
+        .then(res => dispatch(
+            {type: FETCH_TOKEN, payload: res}
+        ), rej => dispatch({type: FETCH_TOKEN_ERROR, payload: rej}));
 };

@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import AppBar from "@material-ui/core/AppBar";
 import { withStyles } from '@material-ui/core/styles';
 import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
 import HomeIcon from '@material-ui/icons/Home';
+import AddIcon from '@material-ui/icons/Add'
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Link from '@material-ui/core/Link';
+import Fab from "@material-ui/core/Fab";
 
 const styles = {
     root: {
@@ -23,6 +24,9 @@ const styles = {
     link: {
         textDecoration: 'none',
         color: 'white'
+    },
+    add: {
+        marginRight: 20,
     }
 };
 
@@ -47,16 +51,17 @@ export class Header extends React.PureComponent {
         const {classes, isAuth} = this.props;
         return (
             <header className={classes.root}>
-                <AppBar position="static" color="secondary">
+                <AppBar position="static" color="primary">
                     <Toolbar>
-                        <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-                          <Link href={isAuth ? '/surveys' : '/'} color='inherit'>
+                        <Fab color="primary" size="medium" className={classes.menuButton} href={isAuth ? '/surveys' : '/'}>
                             <HomeIcon />
-                          </Link>
-                        </IconButton>
+                        </Fab>
                         <Typography variant="h6" color="inherit" className={classes.grow}>
                             Emaily
                         </Typography>
+                        <Fab color="primary" aria-label="Add" size="medium" className={classes.add} href="/charge">
+                            <AddIcon />
+                        </Fab>
                         <AuthBtn isAuth={isAuth} classes={classes}/>
                     </Toolbar>
                 </AppBar>

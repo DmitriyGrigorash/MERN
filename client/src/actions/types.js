@@ -1,2 +1,4 @@
 export const FETCH_USER = 'FETCH_USER';
 export const FETCH_USER_ERROR = 'FETCH_USER_ERROR';
+export const FETCH_TOKEN = 'FETCH_TOKEN';
+export const FETCH_TOKEN_ERROR = 'FETCH_TOKEN_ERROR';

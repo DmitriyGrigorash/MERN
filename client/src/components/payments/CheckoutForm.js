@@ -1,7 +1,11 @@
 import React from 'react';
 import {CardElement, injectStripe} from 'react-stripe-elements';
+import {connect} from "react-redux";
+import PropTypes from 'prop-types';
 
+import {handleToken} from "../../actions";
 import './CheckoutForm.css';
+
 
 const handleChange = (change) => {
     console.log('[change]', change);
@@ -12,20 +16,24 @@ const handleReady = () => {
 
 
 class CheckoutForm extends React.Component {
-    handleSubmit = (ev) => {
+
+    constructor(props) {
+        super(props);
+        this.submit = this.submit.bind(this);
+    }
+
+
+    async submit(ev) {
         ev.preventDefault();
-        if (this.props.stripe) {
-            this.props.stripe
-                .createToken()
-                .then((payload) => console.log('[token]', payload));
-        } else {
-            console.log("Stripe.js hasn't loaded yet.");
-        }
-    };
+        let {token} = await this.props.stripe.createToken({name: "Charge"});
+        console.log('### token', token);
+        this.props.handleToken(token);
+    }
+
     render() {
         return (
             <div className="CheckoutForm">
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.submit}>
                     <label>
                         Card details
                         <CardElement
@@ -39,4 +47,16 @@ class CheckoutForm extends React.Component {
         );
     }
 }
-export default injectStripe(CheckoutForm);
+
+
+CheckoutForm.propTypes = {
+    handleToken: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        handleToken: (token) => dispatch(handleToken(token))
+    }
+};
+
+export default injectStripe(connect(null, mapDispatchToProps)(CheckoutForm));
