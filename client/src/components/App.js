@@ -3,7 +3,6 @@ import {Route} from "react-router-dom";
 import {connect} from "react-redux";
 import PropTypes from 'prop-types';
 
-/**** TODO: Course Part: 85 ****/
 
 import * as actions from '../actions';
 

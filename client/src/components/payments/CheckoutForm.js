@@ -27,7 +27,7 @@ class CheckoutForm extends React.Component {
         ev.preventDefault();
         let {token} = await this.props.stripe.createToken({name: "Charge"});
         console.log('### token', token);
-        this.props.handleToken(token);
+        this.props.handleToken(token.id);
     }
 
     render() {

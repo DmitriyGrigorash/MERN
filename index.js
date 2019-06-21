@@ -20,6 +20,7 @@ mongoose.connect(keys.mongoUri, { useNewUrlParser: true });
 
 /*** Run express ***/
 const app = express();
+app.use(require("body-parser").text());
 app.use(cookieParser());
 app.use(cookieSession({
     name: 'sSs',
@@ -36,6 +37,7 @@ if (port == null || port == "") {
 }
 
 require('./routes/authRoutes')(app);
+require('./routes/billingRoutes')(app);
 
 
 // *** Express listen
