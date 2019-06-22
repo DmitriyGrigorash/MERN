@@ -6,7 +6,7 @@ import { FETCH_USER, FETCH_USER_ERROR, FETCH_TOKEN, FETCH_TOKEN_ERROR } from './
     * возвращаем не объект с типом экшена и данными, а функцию. И вот в неё автоматически передается аргументом метод
     * dispatch. Это благодаря использованию applyMiddleware при создании стора и инициализации приложения! */
 
-export const fetchUser = () => async (dispatch) => {
+export const fetchUser = () => async dispatch => {
     await axios.get('/api/current_user')
         .then(res => dispatch(
             {
@@ -17,8 +17,11 @@ export const fetchUser = () => async (dispatch) => {
 };
 
 export const handleToken = (token) => async dispatch => {
-    await axios.post('/api/stripe', token)
-        .then(res => dispatch(
-            {type: FETCH_TOKEN, payload: res}
-        ), rej => dispatch({type: FETCH_TOKEN_ERROR, payload: rej}));
+    await fetch("/api/stripe", {
+        method: "POST",
+        headers: {"Content-Type": "text/plain"},
+        body: token
+    })
+        .then(res => dispatch({type: FETCH_TOKEN, payload: res}
+        ),rej => dispatch({type: FETCH_TOKEN_ERROR, payload: rej}));
 };

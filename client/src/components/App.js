@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route} from "react-router-dom";
+import {Route, Switch} from "react-router-dom";
 import {connect} from "react-redux";
 import PropTypes from 'prop-types';
 
@@ -26,10 +26,12 @@ class App extends React.Component {
             <main>
                 <React.Fragment>
                     <Header isAuth={this.props.isAuth}/>
-                    <Route path='/' component={Landing} />
-                    <Route path='/charge' component={MyStoreCheckout} />
-                    <Route exact path='/surveys' component={Dashboard} />
-                    <Route path='/surveys/new' component={SurveyNew} />
+                    <Switch>
+                        <Route exact path='/' component={Landing} />
+                        <Route exact path='/charge' component={MyStoreCheckout} />
+                        <Route exact path='/surveys' component={Dashboard} />
+                        <Route path='/surveys/new' component={SurveyNew} />
+                    </Switch>
                 </React.Fragment>
             </main>
         )
