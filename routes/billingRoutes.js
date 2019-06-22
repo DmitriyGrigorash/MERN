@@ -9,7 +9,11 @@ module.exports = app => {
             source: req.body
         }, (err, charge) => {
             if (err) res.status(500).end();
-            res.send({charge});
+            // res.send({charge});
         });
+
+        req.user.credits += 5;
+        const user = await req.user.save();
+        res.send(user);
     });
 };
