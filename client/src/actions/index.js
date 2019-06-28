@@ -23,6 +23,6 @@ export const handleToken = (token) => async dispatch => {
         body: token
     })
     .then(res => res.json())
-    .then(res => dispatch({type: FETCH_TOKEN, payload: res}),
-          rej => dispatch({type: FETCH_TOKEN_ERROR, payload: rej}));
+    .then(res => dispatch({type: FETCH_USER, payload: res}),
+          rej => dispatch({type: FETCH_USER_ERROR, payload: rej}));
 };
