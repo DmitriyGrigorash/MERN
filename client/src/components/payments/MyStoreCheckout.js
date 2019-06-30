@@ -7,7 +7,7 @@ class MyStoreCheckout extends React.Component {
     render() {
         return (
             <Elements>
-                <CheckoutForm />
+                <CheckoutForm {...this.props} />
             </Elements>
         );
     }

@@ -1,7 +1,6 @@
 import React from 'react';
 import {CardElement, injectStripe} from 'react-stripe-elements';
 import {connect} from "react-redux";
-import {Redirect} from "react-router-dom";
 import PropTypes from 'prop-types';
 
 import {handleToken} from "../../actions";
@@ -20,7 +19,6 @@ class CheckoutForm extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {complete: false};
 
         this.submit = this.submit.bind(this);
     }
@@ -29,14 +27,10 @@ class CheckoutForm extends React.Component {
         ev.preventDefault();
         let {token} = await this.props.stripe.createToken({name: "Charge"});
         this.props.handleToken(token.id);
-        if (token.id) this.setState({complete: true});
+        if (token.id) this.props.history.push('/surveys');
     }
 
     render() {
-        if (this.state.complete) {
-            return <Redirect to="/surveys" />
-
-        }
         return (
             <div className="CheckoutForm">
                 <form onSubmit={this.submit}>

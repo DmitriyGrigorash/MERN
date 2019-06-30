@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_USER, FETCH_USER_ERROR, FETCH_TOKEN, FETCH_TOKEN_ERROR } from './types';
+import { FETCH_USER, FETCH_USER_ERROR } from './types';
 
 /* redux-thunk middleware using. Нам не нужен вызов метода стора dispatch до тех пор, пока наш axios request
     * не вернет ответ от сервера, а только потом мы вызываем method dispatch! Так происходит, когда в action мы

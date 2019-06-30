@@ -20,6 +20,10 @@ class App extends React.Component {
         this.props.fetchUser();
     }
 
+    componentDidUpdate() {
+        console.log('### update', this.props);
+    }
+
     render() {
 
         return(
