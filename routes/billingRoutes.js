@@ -1,10 +1,6 @@
 const stripe = require("stripe")("sk_test_9YWOBnIAPm008Q0LEm1I5sP200xzZlEsH6");
 const requireLogin = require("../middleware/requireLogin");
 
-stripe.balance.retrieve(function(err, balance) {
-    // asynchronously called
-});
-
 module.exports = app => {
     app.post("/api/stripe", [requireLogin, async (req, res) => {
 
