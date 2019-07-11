@@ -1,3 +1,3 @@
-module.exports = (survey) => {
-    return `<div>${survey.body}</div>`;
+module.exports = (body) => {
+    return `<div>${body}</div>`;
 };

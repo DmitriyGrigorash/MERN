@@ -21,7 +21,7 @@ class App extends React.Component {
     }
 
     componentDidUpdate() {
-        console.log('### update', this.props);
+
     }
 
     render() {
