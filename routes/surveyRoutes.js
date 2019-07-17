@@ -14,8 +14,8 @@ module.exports = app => {
     app.post("/api/surveys", [requireLogin, requireCredits, async (req, res) => {
         // const { subject, body, recipients } = res.body;
 
-        const request = await res.json(req.body);
-        console.log('### res', request);
+        const request = res.json(req.body);
+        // console.log('### res', request);
         // const survey = new SurveyModel({
         //     title,
         //     subject,
@@ -26,11 +26,11 @@ module.exports = app => {
         // });
         console.log('### recipients', recipients);
         const msg = {
-            to: recipients,
+            to: 'dmitriy2216@gmail.com',
             from: 'no-reply@emaily.com',
-            subject,
+            subject: 'Subject',
             text: 'and easy to do anywhere, even with Node.js',
-            html: surveyTemplates(body)
+            html: surveyTemplates('sdfsdfsdfs')
         };
         sgMail.setApiKey(keys.sendGridKey);
         await sgMail.send(msg);
