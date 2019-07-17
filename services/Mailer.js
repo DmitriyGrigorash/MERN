@@ -26,7 +26,6 @@ class Mailer {
 
     sendEmail() {
         sgMail.send(this.msg);
-        console.log('### sendEmail', this.msg);
     }
 }
 
