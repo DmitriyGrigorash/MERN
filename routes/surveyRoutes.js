@@ -1,8 +1,5 @@
 const mongoose = require('mongoose');
 
-const sgMail = require('@sendgrid/mail');
-const keys = require('../config/keys');
-
 const requireLogin = require("../middleware/requireLogin");
 const requireCredits = require("../middleware/requireCredits");
 const Mailer = require('../services/Mailer');
@@ -12,30 +9,29 @@ const SurveyModel = mongoose.model('Survey');
 
 module.exports = app => {
     app.post("/api/surveys", [requireLogin, requireCredits, async (req, res) => {
-        // const { subject, body, recipients } = res.body;
+        const { subject, body, recipient, title } = JSON.parse(req.body);
+        console.log('### req', subject, body, recipient, title);
 
-        const request = res.json(req.body);
-        // console.log('### res', request);
-        // const survey = new SurveyModel({
-        //     title,
-        //     subject,
-        //     body,
-        //     recipients /*recipients.split(',').map(email => email.trim())*/,
-        //     _user: req.user.id,
-        //     dateSent: Date.now(),
-        // });
-        console.log('### recipients', recipients);
-        const msg = {
-            to: 'dmitriy2216@gmail.com',
-            from: 'no-reply@emaily.com',
-            subject: 'Subject',
-            text: 'and easy to do anywhere, even with Node.js',
-            html: surveyTemplates('sdfsdfsdfs')
-        };
-        sgMail.setApiKey(keys.sendGridKey);
-        await sgMail.send(msg);
-        res.send('ok');
-        // const mailer = new Mailer();
-        // mailer.sendEmail();
+        // const splitedRecipiets = recipients.split(',').map(email => email.trim());
+        const survey = new SurveyModel({
+            title,
+            subject,
+            body: surveyTemplates(body),
+            recipient: recipient,
+            _user: req.user.id,
+            dateSent: Date.now(),
+        });
+
+        const mailer = new Mailer(subject, recipient, surveyTemplates(body));
+        await mailer.sendEmail();
+
+        try {
+            await survey.save();
+            req.user.credits -= 1;
+            const user = await req.user.save();
+            res.send(user);
+        } catch (err) {
+            res.status(422).send(err);
+        }
     }]);
 };
