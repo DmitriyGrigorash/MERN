@@ -14,6 +14,7 @@ export default function Dashboard () {
                 color="primary"
                 style={{position: 'fixed', bottom: '100px', right: '50px'}}
                 size="medium"
+                href="/surveys/new"
             >
                 <NavigationIcon />
                 Add
