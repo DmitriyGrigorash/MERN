@@ -10,9 +10,7 @@ import Header from './Header';
 import Landing from './Landing'
 import MyStoreCheckout from "./payments/MyStoreCheckout";
 import Dashboard from './dashboard/Dashboard';
-
-
-const SurveyNew = () => <h2>SurveyNew</h2>;
+import SurveyNew from './surveys/SurveyNew';
 
 
 class App extends React.Component {
