@@ -36,13 +36,13 @@ function AuthBtn ({isAuth, classes}) {
   if (isAuth) {
     return(
       <Button color="inherit">
-          <Link href='/api/logout' className={classes.link}>LOGOUT</Link>
+          <Link href='/api/logout' underline='none' className={classes.link}>LOGOUT</Link>
       </Button>
     )
   } else {
     return (
       <Button color="inherit">
-          <Link href='/auth/google' className={classes.link}>LOGIN</Link>
+          <Link href='/auth/google' underline='none' className={classes.link}>LOGIN</Link>
       </Button>
     )
   }
@@ -61,13 +61,13 @@ export class Header extends React.PureComponent {
                         <Typography variant="h6" color="inherit" className={classes.grow}>
                             Emaily
                         </Typography>
-                        <Fab color="primary" aria-label="Add" size="medium" className={classes.add} href="/charge">
+                        <Fab color="primary" aria-label="Add" size="medium" href="/charge" className={classes.add}>
                             <AddIcon />
                         </Fab>
                         <Badge
+                            color="secondary" max={99999}
                             style={{marginRight: '30px'}}
                             badgeContent={isAuth.credits}
-                            color="secondary" max={99999}
                         >
                             <AccountBalance />
                         </Badge>

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import Button from "@material-ui/core/Button";
+import Link from '@material-ui/core/Link';
+
 import SurveyField from './SurveyField';
 
 export class SurveyForm extends React.Component {
@@ -21,7 +23,9 @@ export class SurveyForm extends React.Component {
                 <form onSubmit={this.props.handleSubmit(values => console.log('### values', values))}>
                     {this.renderFields()}
                     <div className="SurveyFormButtons">
-                        <Button color="default" size="medium" type="submit" variant="contained">Cancel</Button>
+                        <Button color="default" size="medium" type="submit" variant="contained" to="surveys">
+                            <Link href="/surveys" underline="none">Cancel</Link>
+                        </Button>
                         <Button color="primary" size="medium" type="submit" variant="contained">Submit</Button>
                     </div>
                 </form>
