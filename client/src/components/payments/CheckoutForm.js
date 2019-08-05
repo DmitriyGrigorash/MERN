@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import PropTypes from 'prop-types';
 
 import {handleToken} from "../../actions";
-import './CheckoutForm.css';
+import './payments.scss';
 
 
 const handleChange = (change) => {

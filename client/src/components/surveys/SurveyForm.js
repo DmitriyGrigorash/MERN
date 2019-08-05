@@ -6,15 +6,20 @@ import SurveyField from './SurveyField';
 export class SurveyForm extends React.Component {
     renderFields() {
         return (
-            <Field name="surveyTitle" component={SurveyField} type="text" />
+            <div className="SurveyFormFields">
+                <Field label="Survey Title" type="text" name="title" component={SurveyField} />
+                <Field label="Subject Line" type="text" name="subject" component={SurveyField} />
+                <Field label="Email Body" type="text" name="body" component={SurveyField} />
+                <Field label="Recipients List" type="text" name="email" component={SurveyField} />
+            </div>
         )
     }
     render() {
         return (
-            <article>
+            <article className="SurveyForm">
                 <h3>Form Survey</h3>
                 <form onSubmit={this.props.handleSubmit(values => console.log('### values', values))}>
-                    
+                    {this.renderFields()}
                     <Button color="default" size="medium" type="submit">Submit</Button>
                 </form>
             </article>
