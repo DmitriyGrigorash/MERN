@@ -1,12 +1,11 @@
 .SurveyNew {
 	.SurveyForm {
-		
+		width: 300px;
 	}
 	.SurveyFormFields {
 		display: flex;
 		flex-direction: column;
-		align-items: center;
+		align-items: flex-start;
 		justify-content: space-between;
-		width: 300px;
 	}
 }
