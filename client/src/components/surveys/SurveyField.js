@@ -9,6 +9,7 @@ export default function ({label, name}) {
 		        margin="normal"
 		        label={label}
 		        name={name}
+		        fullWidth
       		/>
 		</div>
 	)

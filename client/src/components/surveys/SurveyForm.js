@@ -20,7 +20,10 @@ export class SurveyForm extends React.Component {
                 <h3>Form Survey</h3>
                 <form onSubmit={this.props.handleSubmit(values => console.log('### values', values))}>
                     {this.renderFields()}
-                    <Button color="primary" size="medium" type="submit" variant="contained">Submit</Button>
+                    <div className="SurveyFormButtons">
+                        <Button color="default" size="medium" type="submit" variant="contained">Cancel</Button>
+                        <Button color="primary" size="medium" type="submit" variant="contained">Submit</Button>
+                    </div>
                 </form>
             </article>
         );

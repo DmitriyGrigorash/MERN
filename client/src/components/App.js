@@ -12,6 +12,8 @@ import MyStoreCheckout from "./payments/MyStoreCheckout";
 import Dashboard from './dashboard/Dashboard';
 import SurveyNew from './surveys/SurveyNew';
 
+import './styles.scss';
+
 
 class App extends React.Component {
     componentDidMount() {
@@ -28,13 +30,15 @@ class App extends React.Component {
             <main>
                 <React.Fragment>
                     <Header isAuth={this.props.isAuth}/>
-                    <Switch>
+                    <div className="content">
+                        <Switch>
                         <Route exact path='/' component={Landing} />
                         <Route exact path='/charge' component={MyStoreCheckout} />
                         <Route exact path='/dashboard' component={Dashboard} />
                         <Route exact path='/surveys' component={Dashboard} />
                         <Route path='/surveys/new' component={SurveyNew} />
                     </Switch>
+                    </div>
                 </React.Fragment>
             </main>
         )
