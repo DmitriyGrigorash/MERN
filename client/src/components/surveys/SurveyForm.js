@@ -5,23 +5,29 @@ import Link from '@material-ui/core/Link';
 
 import SurveyField from './SurveyField';
 
-export class SurveyForm extends React.Component {
-    renderFields() {
-        return (
-            <div className="SurveyFormFields">
-                <Field label="Survey Title" type="text" name="title" component={SurveyField} />
-                <Field label="Subject Line" type="text" name="subject" component={SurveyField} />
-                <Field label="Email Body" type="text" name="body" component={SurveyField} />
-                <Field label="Recipients List" type="text" name="email" component={SurveyField} />
-            </div>
-        )
+const validate = (values) => {
+    const errors = {};
+
+    if(!values.title) {
+        errors.title = 'Provide a title'
     }
+
+    return errors;
+}
+
+
+export class SurveyForm extends React.Component {
     render() {
         return (
             <article className="SurveyForm">
                 <h3>Form Survey</h3>
                 <form onSubmit={this.props.handleSubmit(values => console.log('### values', values))}>
-                    {this.renderFields()}
+                    <div className="SurveyFormFields">
+                        <Field label="Survey Title" type="text" name="title" component={SurveyField} />
+                        <Field label="Subject Line" type="text" name="subject" component={SurveyField} />
+                        <Field label="Email Body" type="text" name="body" component={SurveyField} />
+                        <Field label="Recipients List" type="text" name="email" component={SurveyField} />
+                    </div>
                     <div className="SurveyFormButtons">
                         <Button color="default" size="medium" type="submit" variant="contained" to="surveys">
                             <Link href="/surveys" underline="none">Cancel</Link>
@@ -35,5 +41,6 @@ export class SurveyForm extends React.Component {
 }
 
 export default reduxForm({
+    validate,
     form: 'surveyForm'
 })(SurveyForm);

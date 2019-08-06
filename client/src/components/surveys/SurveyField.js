@@ -1,7 +1,8 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 
-export default function ({label, name}) {
+const SurveyField = ({input, label, name, meta}) => {
+	console.log('meta', meta);
 	return (
 		<div className="SurveyField">
 			<TextField
@@ -10,7 +11,11 @@ export default function ({label, name}) {
 		        label={label}
 		        name={name}
 		        fullWidth
+		        error={meta.touched && meta.error ? true : false}
+		        {...input}
       		/>
 		</div>
 	)
 }
+
+export default SurveyField;
