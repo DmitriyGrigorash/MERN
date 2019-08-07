@@ -4,17 +4,30 @@ import Button from "@material-ui/core/Button";
 import Link from '@material-ui/core/Link';
 
 import SurveyField from './SurveyField';
+import validateEmail from '../../utils/validateEmail';
 
 const validate = (values) => {
     const errors = {};
 
+    errors.email = validateEmail(values.email || '');
+
     if(!values.title) {
         errors.title = 'Provide a title'
+    }
+    if(!values.subject) {
+        errors.subject = 'Provide a subject'
+    }
+    if(!values.body) {
+        errors.body = 'Provide a body'
+    }
+    if(!values.email) {
+        errors.email = 'Provide an email'
     }
 
     return errors;
 }
 
+//*** TODO: Add checking email field before submit form. Remove white spaces (trim) for 
 
 export class SurveyForm extends React.Component {
     render() {

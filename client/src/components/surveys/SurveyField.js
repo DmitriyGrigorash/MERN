@@ -2,16 +2,16 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 
 const SurveyField = ({input, label, name, meta}) => {
-	console.log('meta', meta);
+	const error = meta.touched && meta.error;
 	return (
 		<div className="SurveyField">
 			<TextField
 		        type="text"
 		        margin="normal"
-		        label={label}
+		        label={error ? meta.error : label}
 		        name={name}
 		        fullWidth
-		        error={meta.touched && meta.error ? true : false}
+		        error={error ? true : false}
 		        {...input}
       		/>
 		</div>
