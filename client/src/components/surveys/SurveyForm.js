@@ -20,8 +20,8 @@ const validate = (values) => {
     if(!values.body) {
         errors.body = 'Provide a body'
     }
-    if(!values.email) {
-        errors.email = 'Provide an email'
+    if(!values.recipients) {
+        errors.recipients = 'Provide an email'
     }
 
     return errors;
@@ -39,7 +39,7 @@ export class SurveyForm extends React.Component {
                         <Field label="Survey Title" type="text" name="title" component={SurveyField} />
                         <Field label="Subject Line" type="text" name="subject" component={SurveyField} />
                         <Field label="Email Body" type="text" name="body" component={SurveyField} />
-                        <Field label="Recipients List" type="text" name="email" component={SurveyField} />
+                        <Field label="Recipients List" type="text" name="recipients" component={SurveyField} />
                     </div>
                     <div className="SurveyFormButtons">
                         <Button color="default" size="medium" type="submit" variant="contained" to="surveys">
