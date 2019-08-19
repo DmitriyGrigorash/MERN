@@ -26,3 +26,11 @@ export const handleToken = (token) => async dispatch => {
     .then(res => dispatch({type: FETCH_USER, payload: res}),
           rej => dispatch({type: FETCH_USER_ERROR, payload: rej}));
 };
+
+export const submitSurvey = (formData) => async dispatch => {
+    await fetch("/api/surveys", {
+        method: "POST",
+        headers: {"Content-Type": "text/plain"},
+        body: formData
+    })
+}

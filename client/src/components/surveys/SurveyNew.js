@@ -1,9 +1,12 @@
 import React from 'react';
+import {connect} from "react-redux";
+
+import * as actions from '../../actions';
 
 import SurveyForm from './SurveyForm';
 import './surveys.scss';
 
-export class SurveyNew extends React.Component {
+class SurveyNew extends React.Component {
     render() {
         return (
             <article className="SurveyNew">
@@ -14,4 +17,10 @@ export class SurveyNew extends React.Component {
     };
 }
 
-export default SurveyNew;
+const mapDispatchToProps = dispatch => {
+    return {
+        submitSurvey: () => dispatch(actions.submitSurvey())
+    }
+};
+
+export default connect(null, mapDispatchToProps)(SurveyNew);
