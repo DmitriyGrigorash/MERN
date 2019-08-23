@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
+import PropTypes from 'prop-types';
 
 import * as actions from '../../actions';
 
@@ -11,15 +12,21 @@ class SurveyNew extends React.Component {
         return (
             <article className="SurveyNew">
                 <h2>Surveys New</h2>
-                <SurveyForm />
+                <SurveyForm onSubmit={this.props.submitSurvey} />
             </article>
         );
     };
 }
 
+SurveyNew.propTypes = {
+  submitSurvey: PropTypes.func
+};
+
 const mapDispatchToProps = dispatch => {
     return {
-        submitSurvey: () => dispatch(actions.submitSurvey())
+        submitSurvey: (formData) => {
+            dispatch(actions.submitSurvey(formData))
+        }
     }
 };
 

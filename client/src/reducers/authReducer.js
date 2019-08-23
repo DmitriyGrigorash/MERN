@@ -1,4 +1,4 @@
-import { FETCH_USER, FETCH_USER_ERROR} from "../actions/types";
+import {FETCH_USER, FETCH_USER_ERROR, SUBMIT_SURVEY, SUBMIT_SURVEY_ERROR} from "../actions/types";
 
 const initialState = {
     isAuth: false,
@@ -10,6 +10,10 @@ export default function ( state = initialState, action ) {
             return { ...state, isAuth: action.payload };
         case FETCH_USER_ERROR:
             return { ...state, error: action.payload };
+        case SUBMIT_SURVEY:
+            return { ...state, survey: action.payload };
+        case SUBMIT_SURVEY_ERROR:
+            return { ...state, surveyError: action.payload };
         default:
             return state;
     }

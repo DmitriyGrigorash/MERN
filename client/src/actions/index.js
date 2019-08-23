@@ -1,5 +1,10 @@
 import axios from 'axios';
-import { FETCH_USER, FETCH_USER_ERROR } from './types';
+import {
+    FETCH_USER,
+    FETCH_USER_ERROR,
+    SUBMIT_SURVEY,
+    SUBMIT_SURVEY_ERROR
+} from './types';
 
 /* redux-thunk middleware using. Нам не нужен вызов метода стора dispatch до тех пор, пока наш axios request
     * не вернет ответ от сервера, а только потом мы вызываем method dispatch! Так происходит, когда в action мы
@@ -33,4 +38,7 @@ export const submitSurvey = (formData) => async dispatch => {
         headers: {"Content-Type": "text/plain"},
         body: formData
     })
+    .then(res => res.json())
+    .then(res => dispatch({type: SUBMIT_SURVEY, payload: res}),
+          rej => dispatch({type: SUBMIT_SURVEY_ERROR, payload: rej}));
 }

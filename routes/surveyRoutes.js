@@ -17,12 +17,12 @@ module.exports = app => {
         const { subject, body, recipient, title } = JSON.parse(req.body);
         console.log('### req', subject, body, recipient, title);
 
-        // const splitedRecipiets = recipients.split(',').map(email => email.trim());
+        const splitedRecipiets = recipient.split(',').map(email => email.trim());
         const survey = new SurveyModel({
             title,
             subject,
             body: surveyTemplates(body),
-            recipient: recipient,
+            recipient: splitedRecipiets,
             _user: req.user.id,
             dateSent: Date.now(),
         });

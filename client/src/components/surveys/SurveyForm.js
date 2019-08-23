@@ -27,14 +27,14 @@ const validate = (values) => {
     return errors;
 }
 
-//*** TODO: Add checking email field before submit form. Remove white spaces (trim) for 
+//*** TODO: Add checking email field before submit form. Remove white spaces (trim) for
 
 export class SurveyForm extends React.Component {
     render() {
         return (
             <article className="SurveyForm">
                 <h3>Form Survey</h3>
-                <form onSubmit={this.props.handleSubmit(values => console.log('### values', values))}>
+                <form onSubmit={this.props.handleSubmit}>
                     <div className="SurveyFormFields">
                         <Field label="Survey Title" type="text" name="title" component={SurveyField} />
                         <Field label="Subject Line" type="text" name="subject" component={SurveyField} />
