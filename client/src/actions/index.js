@@ -36,7 +36,7 @@ export const submitSurvey = (formData) => async dispatch => {
     await fetch("/api/surveys", {
         method: "POST",
         headers: {"Content-Type": "text/plain"},
-        body: formData
+        body: JSON.stringify(formData)
     })
     .then(res => res.json())
     .then(res => dispatch({type: SUBMIT_SURVEY, payload: res}),

@@ -42,10 +42,12 @@ export class SurveyForm extends React.Component {
                         <Field label="Recipients List" type="text" name="recipients" component={SurveyField} />
                     </div>
                     <div className="SurveyFormButtons">
-                        <Button color="default" size="medium" type="submit" variant="contained" to="surveys">
+                        <Button color="default" size="medium" type="submit" variant="contained">
                             <Link href="/surveys" underline="none">Cancel</Link>
                         </Button>
-                        <Button color="primary" size="medium" type="submit" variant="contained">Submit</Button>
+                        <Button color="default" size="medium" type="submit" variant="contained">
+                            <Link href="/surveys" underline="none">Submit</Link>
+                        </Button>
                     </div>
                 </form>
             </article>

@@ -14,10 +14,9 @@ module.exports = app => {
     });
 
     app.post("/api/surveys", [requireLogin, requireCredits, async (req, res) => {
-        const { subject, body, recipient, title } = JSON.parse(req.body);
-        console.log('### req', subject, body, recipient, title);
+        const { subject, body, recipients, title } = JSON.parse(req.body);
 
-        const splitedRecipiets = recipient.split(',').map(email => email.trim());
+        const splitedRecipiets = recipients.split(',').map(email => email.trim());
         const survey = new SurveyModel({
             title,
             subject,
@@ -27,7 +26,7 @@ module.exports = app => {
             dateSent: Date.now(),
         });
 
-        const mailer = new Mailer(subject, recipient, surveyTemplates(body));
+        const mailer = new Mailer(subject, splitedRecipiets, surveyTemplates(body));
         await mailer.sendEmail();
 
         try {
