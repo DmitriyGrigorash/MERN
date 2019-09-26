@@ -46,7 +46,7 @@ export class SurveyForm extends React.Component {
                             <Link href="/surveys" underline="none">Cancel</Link>
                         </Button>
                         <Button color="default" size="medium" type="submit" variant="contained">
-                            <Link href="/surveys" underline="none">Submit</Link>
+                            Submit
                         </Button>
                     </div>
                 </form>

@@ -22,10 +22,11 @@ SurveyNew.propTypes = {
   submitSurvey: PropTypes.func
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         submitSurvey: (formData) => {
-            dispatch(actions.submitSurvey(formData))
+            dispatch(actions.submitSurvey(formData));
+            ownProps.history.push('/surveys');
         }
     }
 };
