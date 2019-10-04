@@ -15,7 +15,11 @@ module.exports = app => {
         });
 
         req.user.credits = parseInt(req.user.credits, 10) + 15;
-        const user = await req.user.save();
-        res.send(user);
+        try {
+            const user = await req.user.save();
+            res.send(user);
+        } catch (err) {
+            res.send(err);
+        }
     }]);
 };

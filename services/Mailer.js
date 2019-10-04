@@ -15,15 +15,6 @@ class Mailer {
         };
     }
 
-    formatAddresses(recipients) {
-        if (recipients.length === 1) {
-            return recipients[0];
-        }
-        return recipients.map(({ email }) => {
-            return email;
-        })
-    }
-
     sendEmail() {
         sgMail.send(this.msg);
     }

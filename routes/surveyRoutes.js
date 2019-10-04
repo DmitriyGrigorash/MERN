@@ -5,7 +5,7 @@ const requireCredits = require("../middleware/requireCredits");
 const Mailer = require('../services/Mailer');
 const surveyTemplates = require('../services/emailTemplates/surveyTemplate');
 
-const SurveyModel = mongoose.model('Survey');
+const SurveyModel = mongoose.model('surveys');
 
 module.exports = app => {
 
@@ -32,6 +32,7 @@ module.exports = app => {
         try {
             await survey.save();
             req.user.credits -= 1;
+            console.log('### req.user', req.user);
             const user = await req.user.save();
             res.send(user);
         } catch (err) {
@@ -40,6 +41,6 @@ module.exports = app => {
     }]);
 
     app.post("/api/surveys/webhooks", (req, res) => {
-        console.log('### req.body', req.body);
+        console.log('### req.body', req.body, res);
     });
 };
