@@ -11,7 +11,7 @@ export default function ( state = initialState, action ) {
         case FETCH_USER_ERROR:
             return { ...state, error: action.payload };
         case SUBMIT_SURVEY:
-            return { ...state, survey: action.payload };
+            return { ...state, survey: action.payload, isAuth: action.payload.credits };
         case SUBMIT_SURVEY_ERROR:
             return { ...state, surveyError: action.payload };
         default:

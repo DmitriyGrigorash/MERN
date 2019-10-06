@@ -16,23 +16,22 @@ module.exports = app => {
     app.post("/api/surveys", [requireLogin, requireCredits, async (req, res) => {
         const { subject, body, recipients, title } = JSON.parse(req.body);
 
-        const splitedRecipiets = recipients.split(',').map(email => email.trim());
+        // const splitedRecipiets = recipients.split(',').map(email => email.trim());
         const survey = new SurveyModel({
             title,
             subject,
             body: surveyTemplates(body),
-            recipient: splitedRecipiets,
+            recipient: recipients,
             _user: req.user.id,
             dateSent: Date.now(),
         });
 
-        const mailer = new Mailer(subject, splitedRecipiets, surveyTemplates(body));
+        const mailer = new Mailer(subject, recipients, surveyTemplates(body));
         await mailer.sendEmail();
 
         try {
             await survey.save();
             req.user.credits -= 1;
-            console.log('### req.user', req.user);
             const user = await req.user.save();
             res.send(user);
         } catch (err) {
@@ -41,6 +40,6 @@ module.exports = app => {
     }]);
 
     app.post("/api/surveys/webhooks", (req, res) => {
-        console.log('### req.body', req.body, res);
+        console.log('### req.body', req.body);
     });
 };
