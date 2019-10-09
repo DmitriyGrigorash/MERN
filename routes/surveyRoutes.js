@@ -9,7 +9,7 @@ const SurveyModel = mongoose.model('surveys');
 
 module.exports = app => {
 
-    app.get("/api/surveys/thanks", (req, res) => {
+    app.get("/api/surveys/:surveyId/:choice", (req, res) => {
         res.send("Thanks for voting")
     });
 
@@ -20,13 +20,13 @@ module.exports = app => {
         const survey = new SurveyModel({
             title,
             subject,
-            body: surveyTemplates(body),
+            body: body,
             recipient: recipients,
             _user: req.user.id,
             dateSent: Date.now(),
         });
 
-        const mailer = new Mailer(subject, recipients, surveyTemplates(body));
+        const mailer = new Mailer(subject, recipients, surveyTemplates(survey));
         await mailer.sendEmail();
 
         try {
@@ -40,6 +40,8 @@ module.exports = app => {
     }]);
 
     app.post("/api/surveys/webhooks", (req, res) => {
-        console.log('### req.body', req.body);
+        const events = req.body.map(({email, url}) => {
+            const pathname = new URL(url).pathname;
+        });
     });
 };

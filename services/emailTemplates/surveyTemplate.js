@@ -1,15 +1,15 @@
 const keys = require('../../config/keys');
 
-module.exports = (body) => {
+module.exports = (survey) => {
     return `
     <html>
       <body>
         <div style="text-align: center">
           <h3>I'd like your input</h3>
           <p>Please answer on following question:</p>
-          <p>${body}</p>
-          <div><a href='${keys.redirectDomain}/api/surveys/thanks'>Yes</a></div> 
-          <div><a href='${keys.redirectDomain}/api/surveys/thanks'>No</a></div> 
+          <p>${survey.body}</p>
+          <div><a href='${keys.redirectDomain}/api/surveys/${survey.id}'>Yes</a></div> 
+          <div><a href='${keys.redirectDomain}/api/surveys/${survey.id}'>No</a></div> 
         </div>
       </body>
     </html>
