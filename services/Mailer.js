@@ -4,10 +4,10 @@ const keys = require('../config/keys');
 
 sgMail.setApiKey(keys.sendGridKey);
 class Mailer {
-    constructor(subject, recipient, body) {
+    constructor(subject, recipients, body) {
 
         this.msg = {
-            to: recipient,
+            to: recipients,
             from: 'no-reply@emaily.com',
             subject: subject,
             text: 'and easy to do anywhere, even with Node.js',
@@ -16,7 +16,7 @@ class Mailer {
     }
 
     sendEmail() {
-        sgMail.send(this.msg);
+        sgMail.sendMultiple(this.msg);
     }
 }
 

@@ -25,9 +25,7 @@ const validate = (values) => {
     }
 
     return errors;
-}
-
-//*** TODO: Add checking email field before submit form. Remove white spaces (trim) for
+};
 
 export class SurveyForm extends React.Component {
     render() {
