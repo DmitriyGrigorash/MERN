@@ -19,7 +19,6 @@ module.exports = app => {
         const { subject, body, recipients, title } = JSON.parse(req.body);
 
         const formattedRecipients = recipients.split(',').map(email => ({ email: email.trim() }));
-        console.log('### formattedRecipients', formattedRecipients);
         const survey = new SurveyModel({
             title,
             subject,
