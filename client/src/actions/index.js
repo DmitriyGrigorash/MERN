@@ -3,7 +3,9 @@ import {
     FETCH_USER,
     FETCH_USER_ERROR,
     SUBMIT_SURVEY,
-    SUBMIT_SURVEY_ERROR
+    SUBMIT_SURVEY_ERROR,
+    FETCH_SURVEYS,
+    FETCH_SURVEYS_ERROR
 } from './types';
 
 /* redux-thunk middleware using. Нам не нужен вызов метода стора dispatch до тех пор, пока наш axios request
@@ -41,4 +43,12 @@ export const submitSurvey = (formData) => async dispatch => {
     .then(res => res.json())
     .then(res => dispatch({type: SUBMIT_SURVEY, payload: res}),
           rej => dispatch({type: SUBMIT_SURVEY_ERROR, payload: rej}));
-}
+};
+
+export const fetchSurveys = () => async dispatch => {
+    await axios.get('/api/surveys')
+        .then(res => dispatch(
+            { type: FETCH_SURVEYS, payload: res.data }
+        ),
+        rej => dispatch({type: FETCH_SURVEYS_ERROR, payload: rej}))
+};
