@@ -19,7 +19,6 @@ class SurveysList extends Component {
 }
 
 const mapStateToProps = ({ surveysState }) => {
-
     return { surveys: surveysState.surveys };
 };
 
